@@ -18,7 +18,7 @@ for row in rows:
 	cols_text = cols[1].get_text()
 	colors = cols_text.split(',')
 	all_colors.extend([color.strip() for color in colors])
-
+# I did something today
 # counts = Counter(all_colors)
 # print(counts.most_common(1))
 sorted_colors = sorted(all_colors)
