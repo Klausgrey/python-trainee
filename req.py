@@ -1,6 +1,7 @@
 from pymongo import MongoClient
 from dotenv import load_dotenv
 import os
+import random
 
 load_dotenv()
 
@@ -55,9 +56,32 @@ def recursive_fxn(arr, target):
 		return recursive_fxn(arr[1:], target)
 
 
+result = [random.randint(0, 1) for _ in range(4)]
+num = "".join(str(x) for x in result)
+
+# convert to base 10
+base_10 = int(num, 2)
+
+
+
 # print(f"Mean color: {mean_color}")
 # print(f"Most worn color is: {max_color}")
 # print(sorted_color)
 # print(sorted_color[index])
 # print(variance)
 # print(f"{p_red:.2f}")
+# print(num)
+# print(base_10)
+
+
+def fibonacci(n):
+	a, b = 0, 1
+	total = 0
+	for i in range(n):
+		total += a
+		c = a + b
+		a = b
+		b = c
+	return total
+
+print(fibonacci(50))
