@@ -1,3 +1,12 @@
+from pymongo import MongoClient
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+client = MongoClient(os.getenv("MONGO_URI"))
+db = client["test"]
+collection = db["bincom_colors"]
 from bs4 import BeautifulSoup
 with open("index.html", "r",) as f:
 	soup = BeautifulSoup(f, "html.parser")
@@ -30,11 +39,24 @@ mean_color = min(check, key=lambda color: abs(check[color] - mean_freq))
 max_color = max(check, key=lambda color: check[color])
 sorted_color = sorted(check, key=lambda color: check[color])
 index = len(sorted_color) // 2
-variance = sum([(check[value] - mean_freq) ** 2 for value in check]) / len(check)
+variance = sum((check[value] - mean_freq) ** 2 for value in check) / len(check) #a generator expression
+p_red = check["RED"] / len(all_colors)
+
+for color, freq in check.items():
+	collection.insert_one({"color": color, "frequency": freq})
+
+def recursive_fxn(arr, target):
+	if len(arr) == 0:
+		return False
+	if arr[0] == target:
+		return True
+	else:
+		return recursive_fxn(arr[1:], target)
 
 
 # print(f"Mean color: {mean_color}")
 # print(f"Most worn color is: {max_color}")
 # print(sorted_color)
 # print(sorted_color[index])
-print(variance)
+# print(variance)
+# print(f"{p_red:.2f}")
