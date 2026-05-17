@@ -45,6 +45,7 @@ p_red = check["RED"] / len(all_colors)
 for color, freq in check.items():
 	collection.insert_one({"color": color, "frequency": freq})
 
+# a recursive searching algorithm to search for a number entered by user in a list of numbers.
 def recursive_fxn(arr, target):
 	if len(arr) == 0:
 		return False
