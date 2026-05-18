@@ -8,6 +8,7 @@ load_dotenv()
 client = MongoClient(os.getenv("MONGO_URI"))
 db = client["test"]
 collection = db["bincom_colors"]
+
 from bs4 import BeautifulSoup
 with open("index.html", "r",) as f:
 	soup = BeautifulSoup(f, "html.parser")
